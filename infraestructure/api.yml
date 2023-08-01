@@ -10,10 +10,10 @@ Resources:
       NetworkMode: awsvpc
       RequiresCompatibilities:
         - FARGATE
-      ExecutionRoleArn: 'arn:aws:iam::959309513507:role/LabRole'
+      ExecutionRoleArn: "arn:aws:iam::510887262905:role/LabRole"
       ContainerDefinitions:
         - Name: api-productos
-          Image: "959309513507.dkr.ecr.us-east-1.amazonaws.com/api-productos:latest"
+          Image: "510887262905.dkr.ecr.us-east-1.amazonaws.com/api-productos:latest"
           Cpu: 512
           Memory: 1024
           PortMappings:
@@ -51,7 +51,11 @@ Resources:
               Protocol: tcp
           Essential: false
           HealthCheck:
-            Command: ["CMD-SHELL", "mongosh --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 1)'"]
+            Command:
+              [
+                "CMD-SHELL",
+                "mongosh --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 1)'",
+              ]
             Interval: 30 # Intervalo entre comprobaciones de salud en segundos
             Timeout: 5 # Tiempo máximo en segundos permitido para una comprobación de salud
             Retries: 3 # Número de veces que se realizará la comprobación antes de declarar el contenedor como no saludable
